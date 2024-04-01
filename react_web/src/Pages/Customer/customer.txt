@@ -1,0 +1,277 @@
+import { useState, useEffect } from 'react'
+import { Table, Stack, Button, Modal, Form, FloatingLabel } from 'react-bootstrap'
+import { request } from '../../share/request'
+
+
+const CustomerPage = () => {
+
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        getlist();
+    })
+    const getlist = async () => {
+        const res = await request("customer", "get", {});
+        //console.log(res)
+        if (res) {
+            setList(res.list);
+        }
+    }
+    // if(gender == "0"){
+    //     return 'Female'
+    // }else{
+    //     return 'male'
+    // }
+
+    const onDelete = async (id) => {
+        const res = await request("customer/" + id, "delete");
+        if (res) {
+            getlist();
+        }
+    }
+
+    // useState for Add New Custoomer
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    
+    //useState of Records
+
+   // const [id, setId] = useState("")
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [gender, setGender] = useState("");
+    // const [phone, setPhone] = useState("");
+
+    //  Edit
+    const [showEditModal, setShowEditModal] = useState(false);
+    const closeEdit = () => setShowEditModal(false);
+    const openEdit = () => setShowEditModal(true);
+
+    // Button in add new modal
+
+    // const onClose = ()=>{
+    //     setShow(false)
+    // }
+
+    // const onClear = ()=>{
+        
+    // }
+
+    // const onSubmit = async ()=>{
+    //     var param = {
+    //         FirstName : firstName,
+    //         LastName : lastName,
+    //         Gender: gender,
+    //         Phone : phone
+    //        }
+    //     const res = await request("customer", "post", param);
+    //     if (res) {
+    //         if(!(res.error)){
+    //             getlist();
+    //         }else{
+    //             alert(res.message)
+    //         }
+    // }
+// }
+    return (
+
+        <div>
+
+            {/* Add new */}
+            <div style={{ display: 'flex' }}>
+                <Button style={{ marginLeft: '470px' }} type="primary" onClick={setShow(true)}> New category</Button>
+            </div>
+
+            {/* Add New Modal */}
+            {/* <Modal show={show} onHide={handleClose}  animation={false} >
+                <Modal.Header closeButton>
+                    <Modal.Title>Add New Customer</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body> */}
+                    {/* {/* <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                              {/* <Form.Label>ID</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="id"
+                                autoFocus
+                            /> <br></br> */}
+                    {/* <Form.Label>Category Name</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="First Name"
+                            /><br></br> */}
+                    {/* <Form.Label>Category Name</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="Last Name"
+                            /><br></br>
+                              <Form.Control
+                                type="text"
+                                placeholder="Gender"
+                            /><br></br> */}
+                    {/* <Form.Label>Description</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="Phone"
+                            />
+                        </Form.Group> */}
+                    {/* 
+                    </Form>  */}
+{/* 
+                    <FloatingLabel controlId='firstName'
+                        label='First Name'
+                        className='mb-3'
+                    >
+                        <Form.Control
+                            onChange={(event) =>setFirstName(event.target.value)}
+                            value={firstName}
+                            type='text'
+                            placeholder='First Name'
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId='lastName'
+                        label='Last Name'
+                        className='mb-3'
+                    >
+                        <Form.Control
+                            onChange={(event) => setLastName(event.target.value)}
+                            value={lastName}
+                            type='text'
+                            placeholder='Last Name'
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId='gender'
+                        label='Gender'
+                        className='mb-3'
+                    >
+                        <Form.Control
+                        onChange={(event) => setGender(event.target.value)}
+                            value={gender}
+                            type='text'
+                            placeholder='Gender'
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId='phone'
+                        label='Phone'
+                        className='mb-3'
+                    >
+                        <Form.Control
+                         onChange={(event)=>setPhone(event.target.value)}
+                            value={phone}
+                            type='text'
+                            placeholder='Phone'
+                        />
+                    </FloatingLabel>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={onClose}>
+                        Close
+                    </Button>
+                    <Button variant="secondary" onClick={onClear}>
+                        Clear
+                    </Button>
+                    <Button variant="primary" onClick={onSubmit}>
+                        Save
+                    </Button>
+                </Modal.Footer>
+            </Modal> */}
+
+            {/* Edit Modal */}
+            {/* <Modal show={showEditModal} onHide={closeEdit}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Category</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body> */}
+
+                    {/* <Form>
+                        <Form.Group className="mb-3"> */}
+
+                    {/* <Form.Label>Category Name</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="Category Name"
+                            /><br></br> */}
+                    {/* <Form.Label>Description</Form.Label> */}
+                    {/* <Form.Control
+                                type="text"
+                                placeholder="Description"
+                            />
+                        </Form.Group>
+                    </Form> */}
+
+                    {/* <FloatingLabel controlId='firstName'
+                        label='First Name'
+                        className='mb-3'
+                    >
+                        <Form.Control
+                            value={firstName}
+                            type='text'
+                            placeholder='First Name'
+                        />
+
+
+                    </FloatingLabel> */}
+                    {/* <div>jjjj</div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeEdit}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={closeEdit}>
+                        Save
+                    </Button>
+                </Modal.Footer>
+            </Modal> */}
+
+
+            <div><h3>Customer</h3></div>
+
+            <div> <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+
+                    </tr>
+                </thead>
+
+                <tbody >
+                    {list.map((item, index) => (
+                        <tr key={index}>
+                            <td >{item.Id}</td>
+                            <td>{item.FirstName}</td>
+                            <td>{item.LastName}</td>
+                            <td>{item.Gender = 1 ? 'Male' : 'Female'}</td>
+                            <td>{item.Phone}</td>
+                            <td>
+                                <Stack direction="horizontal" gap={2}>
+                                    <Button type="primary" onClick={openEdit}>Edit</Button>
+                                    <Button type="danger" onClick={onDelete} style={{ backgroundColor: 'red', color: 'white' }}>Delete</Button>
+                                </Stack>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+
+            </div>
+        </div>
+
+    )
+}
+
+export default CustomerPage;

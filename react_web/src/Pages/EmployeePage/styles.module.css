@@ -1,0 +1,33 @@
+.searchContainer {
+    width: 100%;
+    display: flex;
+    background-color: antiquewhite;
+    height: 40px;
+    align-items: center;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.searchBar {
+    display: flex;
+    width: 100%;
+
+}
+
+.searchLabel {
+
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 20px;
+
+}
+
+.searchBox {
+    width: 300px;
+    margin-left: 20px;
+
+}
+
+.addNew {
+    margin-right: 9%;
+}
