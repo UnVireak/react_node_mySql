@@ -158,8 +158,8 @@ const create = (req, res) => {
     })
 }
   
-    var sql = "INSERT INTO employee (emp_name, gender,role, emp_img, address,phone) VALUE(?, ?, ?, ?, ?, ?)"
-    var param = [emp_name, gender, role, filename, address, phone];
+    var sql = "INSERT INTO employee (emp_name, gender,role,emp_img, address,phone) VALUE(?, ?, ?, ?, ?, ?)"
+    var param = [emp_name, gender, role,filename, address, phone];
     db.query(sql, param, (error, rows) => {
         if (!error) {
             res.json({
@@ -168,8 +168,8 @@ const create = (req, res) => {
             })
         } else {
             res.json({
-                error: true,
-                message: error
+                error:true,
+                message:error
             })
         }
     })
