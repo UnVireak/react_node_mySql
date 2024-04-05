@@ -209,6 +209,11 @@ const EmployeePage = () => {
     const onChangeTextSearch = (e) => {
         setTextSearch(e.target.value)
     }
+
+    const onchangeFile = (e)=>{
+        var img_file = e.target.files
+        console.log(img_file)
+    }
     return (
         <div >
             <Spin spinning={loading}>
@@ -289,6 +294,16 @@ const EmployeePage = () => {
                                 rules={[{ required: true, },]}
                             >
                                 <Input />
+                            </Form.Item>
+
+                            <Form.Item
+                                label ="Select file"
+                            
+                            >
+                                <Input type="file"
+                                 onChange = {onchangeFile}
+                                />
+                               
                             </Form.Item>
 
                             {/* <Form.Item
