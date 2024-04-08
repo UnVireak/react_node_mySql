@@ -46,6 +46,7 @@ const EmployeePage = () => {
     const [emp_Id, setEmpID] = useState(null)
     const [loading, setLoading] = useState(false)
     const [textSearch, setTextSearch] = useState('')
+    const [image, setImage] = useState(null)
 
 
 
@@ -110,17 +111,24 @@ const EmployeePage = () => {
 
     // Post
     const onFinish = async (values) => {
-        var param = {
-            "emp_name": values.emp_name,
-            "gender": values.gender,
-            "role": values.role,
-            "address": values.address,
-            "phone": values.phone
-        }
-
+        // var param = {
+        //     "emp_name": values.emp_name,
+        //     "gender": values.gender,
+        //     "role": values.role,
+        //     "address": values.address,
+        //     "phone": values.phone
+        // }
+        var formData = new FormData();
+        formData.append("emp_name", values.emp_name)
+        formData.append("gender", values.gender)
+        formData.append("role", values.role)
+        formData.append("address", values.address)
+        formData.append("phone", values.phone)
+        formData.append("emp_img", image, image.filename)
         var method = "post"
         if (emp_Id != null) {
-            param.emp_id = emp_Id
+            // param.emp_id = emp_Id
+            formData.append("emp_id", emp_Id)
             method = "put"
         }
         // const res = await request("employee", method, param);
@@ -135,7 +143,7 @@ const EmployeePage = () => {
         //             message.error(res.message);
         //         }
         try {
-            const res = await request("employee", method, param);
+            const res = await request("employee", method, formData);
             if (res && !res.error) {
                 message.success(res.message);
                 getData();
@@ -211,8 +219,9 @@ const EmployeePage = () => {
     }
 
     const onchangeFile = (e)=>{
-        var img_file = e.target.files
-        console.log(img_file)
+        var img_file = e.target.files[0]
+        // console.log(img_file)
+        setImage(img_file)
     }
     return (
         <div >
@@ -396,6 +405,17 @@ const EmployeePage = () => {
                             key: "Phone",
                             title: "Phone",
                             dataIndex: "phone"
+                        },
+                        {
+                            key: "Image",
+                            title: "Image",
+                            dataIndex: "image",
+                            render: (value, row, index) => {
+                                <img
+                                src={"http://localhost:8080/project/img/"+value}
+                                width={70}
+                                />
+                            }
                         },
                         {
                             key: "Hired Date",
