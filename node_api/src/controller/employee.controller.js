@@ -181,10 +181,6 @@ const setPassword = async (req, res) => {
         password,
         confirmPassword
     } = req.body;
-    // console.log("Phone:", phone);
-    // const user = await checkExistUser(phone);
-    // console.log("User:", user); // Log the result of checkExistUser
-    // res.json({ message: "Test" }); // Placeholder response
 
     var message = {}
     if (phone == null || phone == "") {

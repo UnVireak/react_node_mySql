@@ -131,17 +131,7 @@ const EmployeePage = () => {
             formData.append("emp_id", emp_Id)
             method = "put"
         }
-        // const res = await request("employee", method, param);
-        // console.log(res)
-
-        //         if (!res.error) {
-        //             message.success(res.message);
-        //             getData();
-        //             onReset();
-        //             handleOk();
-        //         } else {
-        //             message.error(res.message);
-        //         }
+       
         try {
             const res = await request("employee", method, formData);
             if (res && !res.error) {
