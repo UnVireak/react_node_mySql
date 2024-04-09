@@ -399,12 +399,15 @@ const EmployeePage = () => {
                         {
                             key: "Image",
                             title: "Image",
-                            dataIndex: "image",
-                            render: (value, row, index) => {
-                                <img
-                                src={"http://localhost:8080/project/img/"+value}
-                                width={70}
-                                />
+                            dataIndex: "emp_img",
+                            render: (value, rows, index) => {
+                                return (
+                                    <img
+                                        src={"http://localhost:8080/project/img/" + value}
+                                        width={70}
+                                        alt="Image"
+                                    />
+                                );
                             }
                         },
                         {
