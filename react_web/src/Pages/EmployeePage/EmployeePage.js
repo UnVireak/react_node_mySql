@@ -2,7 +2,7 @@ import { request } from "../../share/request"
 import { useEffect, useState } from "react"
 import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin } from "antd"
 import item from "antd/es/list/Item"
-import { formatDateClient, formatDateServer } from "../../share/helper"
+import { formatDateClient, formatDateServer, config_img_path } from "../../share/helper"
 import styles from "./styles.module.css"
 import { Footer } from "antd/es/layout/layout"
 import { isString } from "antd/es/button"
@@ -403,7 +403,7 @@ const EmployeePage = () => {
                             render: (value, rows, index) => {
                                 return (
                                     <img
-                                        src={"http://localhost:8080/project/img/" + value}
+                                        src={config_img_path.img_path + value}
                                         width={70}
                                         alt="Image"
                                     />

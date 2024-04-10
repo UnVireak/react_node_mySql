@@ -84,6 +84,8 @@ const getAll = (req, res) => {
     if (textSearch != null && textSearch != "") {
         sqlSelect += " WHERE emp_name LIKE '%" + textSearch + "%' OR phone LIKE '%" + textSearch + "%'"
     }
+    sqlSelect += "ORDER BY emp_id DESC"
+
     db.query(sqlSelect, (error, rows) => {
         if (!error) {
             res.json({

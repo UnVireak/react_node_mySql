@@ -23,3 +23,7 @@ export const isLogin = () => {
     }
     return true;
 }
+
+export const config_img_path  = {
+    img_path : "http://localhost:8080/project/img/"
+}
