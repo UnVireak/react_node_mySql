@@ -1,6 +1,6 @@
 import { request } from "../../share/request"
 import { useEffect, useState } from "react"
-import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin } from "antd"
+import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm } from "antd"
 import item from "antd/es/list/Item"
 import { formatDateClient, formatDateServer, config_img_path } from "../../share/helper"
 import styles from "./styles.module.css"
@@ -49,26 +49,40 @@ const EmployeePage = () => {
     const [image, setImage] = useState(null)
 
 
+    const onDelete = async (rows) => {
+        var param = {
+           emp_id : rows.emp_id,
+           emp_img : rows.emp_img
+        }
+        const res = await request ("employee", "delete", param);
+        if (!res.error){
+            getData();
+        }else{
+            alert(res.message)
+        }
+       
+    }
+    
 
+    // const onDeletes= async (rows) => {
+    //      var param = {
+    //         emp_id : rows.emp_id,
+    //         emp_img : rows.emp_img
+    //     }
+    //     setConfirm(true);
 
-    const onDelete = async (emp_id) => {
-        //  var param = {
-        //     "emp_id":emp_id
-        // }
-        setConfirm(true);
+    //     const handleDelete = async (param) => {
 
-        const handleDelete = async () => {
+    //         const res = await request("employee/" + param, "delete");
+    //         if (res) {
+    //             getData();
+    //         }
+    //         setConfirm(false); // Close the modal after deletion
+    //     };
 
-            const res = await request("employee/" + emp_id, "delete");
-            if (res) {
-                getData();
-            }
-            setConfirm(false); // Close the modal after deletion
-        };
+    //     setConfirmDeleteCallback(() => handleDelete);
 
-        setConfirmDeleteCallback(() => handleDelete);
-
-    };
+    // };
     const [confirmDeleteCallback, setConfirmDeleteCallback] = useState(null);
     //modal useState 
 
@@ -221,7 +235,7 @@ const EmployeePage = () => {
                     <p>hi</p>
                     <space wrapperCol={24} style={{ textAlign: "right" }}>
                         <Button onClick={closeConfirm}>Cancel</Button>
-                        <Button onClick={confirmDeleteCallback}>Ok</Button>
+                        <Button onClick={onDelete}>Ok</Button>
                     </space>
                 </Modal>
 
@@ -402,7 +416,9 @@ const EmployeePage = () => {
                             dataIndex: "emp_img",
                             render: (value, rows, index) => {
                                 return (
+                                    
                                     <img
+                                    key = {index}
                                         src={config_img_path.img_path + value}
                                         width={70}
                                         alt="Image"
@@ -425,7 +441,17 @@ const EmployeePage = () => {
                                 return (
                                     <Space key={index}>
                                         <Button type="primary" onClick={() => onClickEdit(item)}> EDIT</Button>
-                                        <Button danger onClick={() => onDelete(item.emp_id)}>DELETE</Button>
+                                        <Popconfirm
+                                            title="Delete"
+                                            description="Are you sure to delete this record?"
+                                            okText="Yes"
+                                            cancelText="No"
+                                            onConfirm={() => onDelete(item)}
+                                        >
+                                            <Button danger>Delete</Button>
+                                        </Popconfirm>
+
+                                        {/* <Button danger onClick={() => onDelete(item)}>DELETE</Button> */}
                                     </Space>
                                    
                                 )

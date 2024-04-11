@@ -1,6 +1,7 @@
 const db = require("../ulit/db");
 const bcrypt = require("bcrypt");
-
+const { removeFile } = require("../ulit/helper");
+ 
 
 
 const login = async (req,res) => {
@@ -278,10 +279,14 @@ const update = (req, res) => {
     })
 }
 const remove = (req, res) => {
-    var { emp_id } = req.params
+    var { emp_id, emp_img } = req.body
     var sqlDelete = " DELETE FROM employee WHERE emp_id=?"
-    db.query(sqlDelete, emp_id, (error, rows) => {
+    var param = [emp_id]
+    db.query(sqlDelete, param, (error, rows) => {
         if (!error) {
+            if (rows.affectedRows != 0){
+                    removeFile(emp_img)
+            }
             res.json({
                 message: (rows.affectedRows == 1 ? "Delete successfully" : "Can not delete")
             })
