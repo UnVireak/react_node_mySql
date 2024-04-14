@@ -1,5 +1,5 @@
 import { request } from "../../share/request"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm } from "antd"
 import item from "antd/es/list/Item"
 import { formatDateClient, formatDateServer, config_img_path } from "../../share/helper"
@@ -47,6 +47,8 @@ const EmployeePage = () => {
     const [loading, setLoading] = useState(false)
     const [textSearch, setTextSearch] = useState('')
     const [image, setImage] = useState(null)
+    const [imagePre, setImagePre] = useState(null)
+    const refMyImage = useRef()
 
 
     const onDelete = async (rows) => {
@@ -205,6 +207,9 @@ const EmployeePage = () => {
     // Clear
     const onReset = () => {
         form.resetFields();
+        setImage(null)
+        setImagePre(null)
+        // refMyImage.current.value= null
     };
     const onFill = () => {
         form.setFieldsValue({
@@ -226,18 +231,20 @@ const EmployeePage = () => {
         var img_file = e.target.files[0]
         // console.log(img_file)
         setImage(img_file)
+        setImagePre(URL.createObjectURL(img_file))
+
     }
     return (
         <div >
             <Spin spinning={loading}>
 
-                <Modal open={confirm} footer={null} closable={false}>
+                {/* <Modal open={confirm} footer={null} closable={false}>
                     <p>hi</p>
                     <space wrapperCol={24} style={{ textAlign: "right" }}>
                         <Button onClick={closeConfirm}>Cancel</Button>
                         <Button onClick={onDelete}>Ok</Button>
                     </space>
-                </Modal>
+                </Modal> */}
 
                 {/* Add new employee modal */}
 
@@ -310,14 +317,26 @@ const EmployeePage = () => {
                             </Form.Item>
 
                             <Form.Item
-                                label ="Select file"
-                            
+                                label ="Select picture"
+                                name={image}
                             >
                                 <Input type="file"
+                                ref = {refMyImage}
                                  onChange = {onchangeFile}
+                                 
                                 />
-                               
+                                 <img 
+                               src ={imagePre}
+                               width={150}
+                               style={{marginTop:10}}
+                               /> 
                             </Form.Item>
+                         
+                            
+                          
+                               
+                               
+                         
 
                             {/* <Form.Item
                             name="hireDate"

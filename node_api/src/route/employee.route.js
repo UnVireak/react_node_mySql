@@ -7,7 +7,7 @@ const employee = (app) => {
     app.get("/api/employee",emplyeeController.getAll)
     // app.post("/api/employee",emplyeeController.create)
     app.post("/api/employee",upload.single("emp_img") ,emplyeeController.create)
-    app.delete("/api/employee/:emp_id",emplyeeController.remove)
+    app.delete("/api/employee/", emplyeeController.remove)
     app.put("/api/employee",emplyeeController.update)
     app.post("/api/employee/SETpassword",emplyeeController.setPassword)
     app.post("/api/employee/login",emplyeeController.login)
