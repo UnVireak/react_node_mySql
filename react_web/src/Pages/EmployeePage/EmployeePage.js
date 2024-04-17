@@ -141,6 +141,7 @@ const EmployeePage = () => {
         formData.append("address", values.address)
         formData.append("phone", values.phone)
         formData.append("emp_img", image, image.filename)
+
         var method = "post"
         if (emp_Id != null) {
             // param.emp_id = emp_Id
@@ -209,7 +210,7 @@ const EmployeePage = () => {
         form.resetFields();
         setImage(null)
         setImagePre(null)
-        // refMyImage.current.value= null
+        // refMyImage.current.value = null
     };
     const onFill = () => {
         form.setFieldsValue({
@@ -233,6 +234,11 @@ const EmployeePage = () => {
         setImage(img_file)
         setImagePre(URL.createObjectURL(img_file))
 
+    }
+
+    const onRemoveImage = () =>{
+        // setImage(null)
+        // setImagePre(null)
     }
     return (
         <div >
@@ -330,6 +336,10 @@ const EmployeePage = () => {
                                width={150}
                                style={{marginTop:10}}
                                /> 
+                               {emp_Id != null &&
+
+                                <button onClick={onRemoveImage}> Remove</button>
+                               }
                             </Form.Item>
                          
                             
