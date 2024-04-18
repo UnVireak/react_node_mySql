@@ -1,6 +1,6 @@
 import { request } from "../../share/request"
 import React, { useEffect, useState, useRef } from "react"
-import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm } from "antd"
+import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm} from "antd"
 import item from "antd/es/list/Item"
 import { formatDateClient, formatDateServer, config_img_path } from "../../share/helper"
 import styles from "./styles.module.css"
@@ -199,6 +199,7 @@ const EmployeePage = () => {
                 phone: item.phone,
                 hireDate: formatDateServer(item.hired_date)
             });
+            setImagePre(config_img_path.img_path+item.emp_img)
             onOpenModal();
         }
     };
@@ -210,7 +211,7 @@ const EmployeePage = () => {
         form.resetFields();
         setImage(null)
         setImagePre(null)
-        // refMyImage.current.value = null
+        refMyImage.current.value = null
     };
     const onFill = () => {
         form.setFieldsValue({
@@ -236,9 +237,10 @@ const EmployeePage = () => {
 
     }
 
-    const onRemoveImage = () =>{
-        // setImage(null)
-        // setImagePre(null)
+    const onRemoveImage = (x) =>{
+        x.preventDefault()
+        setImage(null)
+        setImagePre(null)
     }
     return (
         <div >
@@ -324,7 +326,7 @@ const EmployeePage = () => {
 
                             <Form.Item
                                 label ="Select picture"
-                                name={image}
+                                // name={image}
                             >
                                 <Input type="file"
                                 ref = {refMyImage}
@@ -336,10 +338,13 @@ const EmployeePage = () => {
                                width={150}
                                style={{marginTop:10}}
                                /> 
-                               {emp_Id != null &&
-
-                                <button onClick={onRemoveImage}> Remove</button>
-                               }
+                               {emp_Id != null && 
+                                               
+                                                    <button onClick={onRemoveImage}>
+                                                        {/* <IoIosCloseCircle size={22} color="red"/> */} remove
+                                                    </button>
+                                               
+                                            }
                             </Form.Item>
                          
                             
