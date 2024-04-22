@@ -1,6 +1,6 @@
 import { request } from "../../share/request"
 import React, { useEffect, useState, useRef } from "react"
-import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm} from "antd"
+import { Table, Space, Button, Tag, Input, Search, Modal, Form, Select, message, Spin, Popconfirm, Row, Col} from "antd"
 import item from "antd/es/list/Item"
 import { formatDateClient, formatDateServer, config_img_path } from "../../share/helper"
 import styles from "./styles.module.css"
@@ -275,7 +275,9 @@ const EmployeePage = () => {
                                 maxWidth: 600,
                             }}
                         >
-                            <Form.Item
+                        <Row gutter={16}>
+                            <Col span={12}>
+                                      <Form.Item
                                 name="emp_name"
                                 label="Name"
                                 rules={[
@@ -285,6 +287,10 @@ const EmployeePage = () => {
                                 <Input />
                             </Form.Item>
 
+                          
+                            </Col>
+
+                            <Col span={12}>
                             <Form.Item
                                 name="gender"
                                 label="Gender"
@@ -299,31 +305,42 @@ const EmployeePage = () => {
                                     <Option value={0}>Female</Option>
                                 </Select>
                             </Form.Item>
-
-                            <Form.Item
+                            </Col>
+                        </Row>
+                  
+                        <Row gutter={16}>
+                            <Col span={12}>
+                                   <Form.Item
                                 name="role"
                                 label="Role"
                                 rules={[{ required: true, },]}
                             >
                                 <Input />
                             </Form.Item>
+                            </Col>
 
-                            <Form.Item
+                            <Col span={12}>
+                                    <Form.Item
                                 name="address"
                                 label="Address"
                                 rules={[{ required: true, },]}
                             >
                                 <Input />
                             </Form.Item>
-
-                            <Form.Item
+                            </Col>
+                        </Row>
+                         
+                        <Row gutter={16}>
+                            <Col span={12}>
+                                 <Form.Item
                                 name="phone"
                                 label="Phone"
                                 rules={[{ required: true, },]}
                             >
                                 <Input />
                             </Form.Item>
-
+                            </Col>
+                            <Col span={12}>
                             <Form.Item
                                 label ="Select picture"
                                 // name={image}
@@ -348,6 +365,13 @@ const EmployeePage = () => {
                             </Form.Item>
                          
                             
+                            </Col>
+                        </Row>
+                        
+
+                           
+
+                          
                           
                                
                                
